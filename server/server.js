@@ -6,11 +6,16 @@ const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
+require('dotenv').config();
+
+
 const app = express();
 const server = http.createServer(app);
 
 const allowedOrigins = [
-  "http://localhost:3000"];
+    'http://localhost:3000',
+    'https://your-frontend-domain.com', // Add your frontend domain
+  ];
 
 const io = socketIO(server, {
   cors: {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 
-const SOCKET_URL = "http://localhost:5000";
+const SOCKET_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 function Chat() {
   const [messages, setMessages] = useState([]);
@@ -12,6 +12,9 @@ function Chat() {
 
   // Get username from localStorage
   const username = localStorage.getItem("username");
+
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
   useEffect(() => {
     if (!username) {
@@ -41,7 +44,7 @@ function Chat() {
 
     const fetchMessages = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/messages", {
+        const response = await fetch("${API_URL}/api/messages", {
           credentials: "include",
         });
         if (response.ok) {
