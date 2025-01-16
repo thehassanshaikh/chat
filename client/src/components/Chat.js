@@ -15,7 +15,6 @@ function Chat() {
 
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
-
   useEffect(() => {
     if (!username) {
       window.location.href = "/login";
@@ -44,7 +43,7 @@ function Chat() {
 
     const fetchMessages = async () => {
       try {
-        const response = await fetch("${API_URL}/api/messages", {
+        const response = await fetch(`${API_URL}/api/messages`, {
           credentials: "include",
         });
         if (response.ok) {
