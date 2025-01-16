@@ -6,16 +6,15 @@ const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-require('dotenv').config();
-
+require("dotenv").config();
 
 const app = express();
 const server = http.createServer(app);
 
 const allowedOrigins = [
-    'http://localhost:3000',
-    'https://your-frontend-domain.com', // Add your frontend domain
-  ];
+  "http://localhost:3000",
+  "https://your-frontend-domain.com", // Add your frontend domain
+];
 
 const io = socketIO(server, {
   cors: {
@@ -46,7 +45,9 @@ const users = [];
 const messages = [];
 
 // JWT secret (use environment variable in production)
-const JWT_SECRET = process.env.JWT_SECRET || "your-default-secret";
+const JWT_SECRET =
+  process.env.JWT_SECRET ||
+  "8626c9071b1cf66274408b10e8db6ca6864e264a0dfd05bac7de4c4e5b071f5b";
 
 // Authentication middleware
 const authenticateToken = (req, res, next) => {
@@ -77,7 +78,10 @@ app.post("/api/register", async (req, res) => {
   users.push({ username, password: hashedPassword });
 
   const token = jwt.sign({ username }, JWT_SECRET);
-  res.cookie("jwt", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
+  res.cookie("jwt", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+  });
   res.json({ message: "Registration successful" });
 });
 
@@ -90,7 +94,10 @@ app.post("/api/login", async (req, res) => {
   }
 
   const token = jwt.sign({ username }, JWT_SECRET);
-  res.cookie("jwt", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
+  res.cookie("jwt", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+  });
   res.json({ message: "Login successful" });
 });
 
