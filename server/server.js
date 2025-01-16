@@ -13,7 +13,7 @@ const server = http.createServer(app);
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://your-frontend-domain.com", // Add your frontend domain
+  "https://chat-two-tan-23.vercel.app", // Add your frontend domain
 ];
 
 const io = socketIO(server, {
